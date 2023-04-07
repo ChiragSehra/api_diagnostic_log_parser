@@ -10,14 +10,14 @@
         - POST_RECOVERY: The shard has completed recovery and is in the process of post-recovery operations.
         - CLOSED: The shard has been closed and is no longer accepting requests.
 
-    - Extrac the size as well of the indexes. 
+    - Extract the size as well of the indexes. 
     - Count the number of shards with 0 size.
 
 ## Cluster stats: ```cluster_stats.json```
 Contains `indices` and `nodes` information.
 
 ### Nodes
-- nodes.count.total: Total count of nodes
+ - nodes.count.total: Total count of nodes
  - nodes.count.data: Total data nodes
  - nodes.count.master: Total master nodes
  - nodes.version: Version of nodes
