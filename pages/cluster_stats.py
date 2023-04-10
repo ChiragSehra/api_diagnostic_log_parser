@@ -3,14 +3,17 @@ import pandas as pd
 from common_fns import aggrid_interactive_table
 import json
 import datetime
+from monitor_es_logs import zip_file_name
 
 st.title("Cluster Stats")
 
-with open('api-diagnostics-20230404-101458/cluster_health.json', 'r') as f:
+# with open('api-diagnostics-20230404-101458/cluster_health.json', 'r') as f:
+#     data = json.load(f)
+
+with open(f'/tmp/{zip_file_name.split(".")[0]}/{zip_file_name.split(".")[0]}/cluster_health.json', 'r') as f:
     data = json.load(f)
 
 df = pd.json_normalize(data)
-
 # Create something for api-diagnostics-20230404-101458/cluster_pending_tasks.json
 
 

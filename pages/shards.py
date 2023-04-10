@@ -1,13 +1,13 @@
 import streamlit as st
 import pandas as pd
-
+from monitor_es_logs import zip_file_name
 from common_fns import aggrid_interactive_table
 
 @st.cache_data
 def load_data(path):
     data = pd.read_json(path)
     return data
-df = load_data(path="api-diagnostics-20230404-101458/shards.json")
+df = load_data(path=f'/tmp/{zip_file_name.split(".")[0]}/{zip_file_name.split(".")[0]}/shards.json')
 
 st.title("Shard utilisation")
 
@@ -27,7 +27,7 @@ if relocating_indexes.empty:
 
     st.metric(label="RELOCATING indexes", value=relocating_shards, delta_color="normal")
 else:
-    st.metric(label="RELOCATING indexes", value=relocating_indexes.count(), delta_color="normal")
+    st.metric(label="RELOCATING indexes", value=relocating_indexes.count()[0], delta_color="normal")
 
 body="""
     - State of index could be 
