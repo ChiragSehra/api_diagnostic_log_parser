@@ -12,23 +12,32 @@ st.title("Shard utilisation")
 if 'ZIP_FILE' in st.session_state:
     ZIP_FILE = st.session_state['ZIP_FILE']
     df = load_data(path=f'/tmp/{ZIP_FILE.split(".")[0]}/{ZIP_FILE.split(".")[0]}/shards.json')
+    
+    co1, co2= st.columns(2)
+    
+    
+    
     # Unassigned Indexes
     unassigned_indexes=df[df['state']=='UNASSIGNED']
     if unassigned_indexes.empty:
         unassigned_shards = 0
 
-        st.metric(label="UNASSIGNED indexes", value=unassigned_shards, delta_color="normal")
+        # st.metric(label="UNASSIGNED indexes", value=unassigned_shards)
+        co1.metric(label="UNASSIGNED indexes", value=unassigned_shards)
     else:
-        st.metric(label="UNASSIGNED indexes", value=unassigned_indexes.count(), delta_color="normal")
+        # st.metric(label="UNASSIGNED indexes", value=unassigned_indexes.count())
+        co1.metric(label="UNASSIGNED indexes", value=unassigned_indexes.count()[0])
 
     # Relocating Indexes
     relocating_indexes=df[df['state']=='RELOCATING']
     if relocating_indexes.empty:
         relocating_shards = 0
 
-        st.metric(label="RELOCATING indexes", value=relocating_shards, delta_color="normal")
+        # st.metric(label="RELOCATING indexes", value=relocating_shards)
+        co2.metric(label="RELOCATING indexes", value=relocating_shards)
     else:
-        st.metric(label="RELOCATING indexes", value=relocating_indexes.count()[0], delta_color="normal")
+        # st.metric(label="RELOCATING indexes", value=relocating_indexes.count()[0])
+        co2.metric(label="RELOCATING indexes", value=relocating_indexes.count()[0])
 
     body="""
         - State of index could be 
@@ -47,7 +56,7 @@ if 'ZIP_FILE' in st.session_state:
     # Display ag-grid with filtering option
     selection = aggrid_interactive_table(df=df)
 
-    st.subheader("Indexes with 0 documents - WORTH DELETING")
+    st.subheader("Indexes with small amount of documents - WORTH DELETING")
 
     THRESHOLD = 150
     docs_150 = df[df['docs']<THRESHOLD].sort_values(by='docs')

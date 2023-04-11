@@ -7,8 +7,8 @@ import zipfile
 # embed streamlit docs in a streamlit app
 # ZIP_FILE = "api-diagnostics-20230404-101458.zip"
 st.set_page_config(
-    page_title="Monitoring Elasticsearch performance logs",
-    page_icon="--",
+    page_title="Monitoring ES performance logs",
+    # page_icon="chart_with_upwards_trend",
     layout='wide'
 )
 st.title("Monitoring ES Logs")

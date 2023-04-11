@@ -5,7 +5,6 @@ import json
 import datetime
 
 st.title("Cluster Stats")
-
 if 'ZIP_FILE' in st.session_state:
     ZIP_FILE = st.session_state['ZIP_FILE']
     with open(f'/tmp/{ZIP_FILE.split(".")[0]}/{ZIP_FILE.split(".")[0]}/cluster_health.json', 'r') as f:
@@ -23,7 +22,7 @@ if 'ZIP_FILE' in st.session_state:
     col6.metric("Active Shard Percent", round(df['active_shards_percent_as_number'],2))
     col7.metric("Total Pending Tasks", df['number_of_pending_tasks'])
 
-
+    st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
 
 
     with open(f'/tmp/{ZIP_FILE.split(".")[0]}/{ZIP_FILE.split(".")[0]}/cluster_stats.json', 'r') as f:
@@ -38,6 +37,8 @@ if 'ZIP_FILE' in st.session_state:
     co4.metric("Total Documents", cluster_stats['indices.docs.count'])
     co5.metric("Total Size of all Shards (GB)", round(cluster_stats['indices.store.size_in_bytes']/9.313225746154785*1e-10,2))
 
+    st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
+
     st.subheader("Memory Information")
     co6, co7, co8, co9, co10  = st.columns(5)
     co6.metric("Available processors for JVM", cluster_stats['nodes.os.available_processors'])
@@ -46,7 +47,9 @@ if 'ZIP_FILE' in st.session_state:
     co9.metric("Total Used Physical Memory (GB)", round(cluster_stats['nodes.os.mem.used_in_bytes']/9.313225746154785*1e-10,2), help="Amount of physical memory in use across all selected nodes")
     co10.metric("Max open file descriptors", cluster_stats['nodes.process.open_file_descriptors.max'], help="Maximum number of concurrently open file descriptors allowed across all selected nodes")
 
-
+    st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
+    
+    
     # JVM INFORMATION
     st.subheader("JVM Information")
     c1, c2, c3= st.columns(3)
@@ -55,7 +58,7 @@ if 'ZIP_FILE' in st.session_state:
     c3.metric("Total Active Threads", cluster_stats['nodes.jvm.threads'],help="Number of active threads in use by JVM across all selected nodes")
         
         
-        
+    st.markdown("""<hr style="height:10px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
         
         
     with open(f'/tmp/{ZIP_FILE.split(".")[0]}/{ZIP_FILE.split(".")[0]}/cluster_settings_defaults.json') as f:

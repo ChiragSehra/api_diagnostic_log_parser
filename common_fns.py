@@ -21,7 +21,7 @@ def aggrid_interactive_table(df: pd.DataFrame):
     selection = AgGrid(
         df,
         enable_enterprise_modules=True,
-        height=400,
+        height=600,
         gridOptions=options.build(),
         theme="streamlit",
         update_mode=GridUpdateMode.MODEL_CHANGED,
